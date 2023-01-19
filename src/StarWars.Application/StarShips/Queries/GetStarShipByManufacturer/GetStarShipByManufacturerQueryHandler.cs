@@ -15,7 +15,7 @@ namespace StarWars.Application.StarShips.Queries.GetStarShipByUser
 
         public async Task<StarShipListViewModel> Handle(GetStarShipByUserQuery request, CancellationToken cancellationToken)
         {
-            var starshipsViewModel = new StarShipListViewModel{};
+            var starshipsViewModel = new StarShipListViewModel();
 
             return starshipsViewModel;
         }

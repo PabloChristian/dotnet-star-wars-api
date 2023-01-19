@@ -22,10 +22,11 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Refit" Version="6.3.2" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="6.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StarWars.Application\StarWars.Application.csproj" />
     <ProjectReference Include="..\StarWars.Domain\StarWars.Domain.csproj" />
   </ItemGroup>
 

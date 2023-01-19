@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StarWars.Domain\StarWars.Domain.csproj" />
+    <ProjectReference Include="..\StarWars.Infrastructure\StarWars.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
