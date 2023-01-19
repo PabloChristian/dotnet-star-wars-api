@@ -4,6 +4,7 @@ using StarWars.Infrastructure.InversionOfControl;
 using StarWars.Application;
 using Newtonsoft.Json;
 using System.Globalization;
+using Newtonsoft.Json.Serialization;
 
 namespace StarWars.Api
 {
@@ -25,6 +26,7 @@ namespace StarWars.Api
                 options.SerializerSettings.Converters.Add(dateConverter);
                 options.SerializerSettings.Culture = new CultureInfo("en-IE");
                 options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver { NamingStrategy = new SnakeCaseNamingStrategy() };
             });
 
             services.AddCors(options => options.AddPolicy("CorsPolicy", builder => builder.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build()));

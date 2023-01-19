@@ -30,7 +30,7 @@ namespace StarWars.Api.Controllers
             return Ok(await _mediator.SendCommandResult(query, new CancellationToken()));
         }
 
-        [HttpGet("manufacturer/{manufacturerId}")]
+        [HttpGet("manufacturer/{manufacturer}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetStarshipsByManufacturer(

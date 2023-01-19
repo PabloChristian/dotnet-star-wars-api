@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using StarWars.Domain.ViewModels.Starships;
+using StarWars.Infrastructure.HttpAdapters.Starships.Results;
 
 namespace StarWars.Application.AutoMapper.Mappers
 {
-    public class StarshipEntityToCreateStarshipViewModelMapper : Profile
+    public class StarshipResultToStarshipViewModelMapper : Profile
     {
-        public StarshipEntityToCreateStarshipViewModelMapper()
+        public StarshipResultToStarshipViewModelMapper()
         {
+            CreateMap<StarshipDataResult, StarshipViewModel>();
         }
     }
 }

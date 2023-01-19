@@ -9,10 +9,7 @@ namespace StarWars.Application.AutoMapper
         {
             return new MapperConfiguration(cfg =>
             {
-                //cfg.AddProfile(new StarshipEntityToDtoMapper());
-                //cfg.AddProfile(new StarshipEntityToStarshipViewModelMapper());
-                //cfg.AddProfile(new StarshipEntityToCreateStarshipViewModelMapper());
-
+                cfg.AddProfile(new StarshipResultToStarshipViewModelMapper());
 
                 cfg.AddProfile<MappingProfile>();
             });
