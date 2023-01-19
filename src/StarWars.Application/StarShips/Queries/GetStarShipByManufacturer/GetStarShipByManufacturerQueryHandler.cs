@@ -20,11 +20,8 @@ namespace StarWars.Application.Starships.Queries.GetStarshipByManufacture
         public async Task<List<StarshipViewModel>> Handle(GetStarshipByManufacturerQuery request, CancellationToken cancellationToken)
         {
             var starShipAdapter = new StarshipAdapter(_starShipAdapter);
-
-            var starShipsData = await starShipAdapter.GetStarships();
-
-            var starshipsViewModel = new List<StarshipViewModel> { };
-            return starshipsViewModel;
+            var starShipsData = await starShipAdapter.GetStarshipsByManufacturer(request.Page, request.Manufacturer);
+            return _mapper.Map<List<StarshipViewModel>>(starShipsData);
         }
     }
 }

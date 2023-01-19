@@ -10,7 +10,7 @@ namespace StarWars.Infrastructure.HttpAdapters.Starships.Interfaces
 {
     public interface IStarshipAdapter
     {
-        [Get("/api/starships")]
-        Task<StarshipResult> GetStarships();
+        [Get("/api/starships?page={page}")]
+        Task<StarshipResult> GetStarships(int page);
     }
 }

@@ -1,7 +1,7 @@
 using StarWars.Api.Configurations;
 using StarWars.Application.AutoMapper;
 using StarWars.Infrastructure.InversionOfControl;
-using StarWars.Application;
+using StarWars.Application.Common;
 using Newtonsoft.Json;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;

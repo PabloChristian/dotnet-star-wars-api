@@ -1,4 +1,5 @@
-﻿using Refit;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Refit;
 using StarWars.Infrastructure.HttpAdapters.Starships.Interfaces;
 using StarWars.Infrastructure.HttpAdapters.Starships.Results;
 using System.Linq;
@@ -14,11 +15,11 @@ namespace StarWars.Infrastructure.HttpAdapters.Starships
             _starShip = starShip;
         }
 
-        public async Task<List<StarshipDataResult>> GetStarships()
+        public async Task<List<StarshipDataResult>> GetStarships(int page)
         {
             try
             {
-                var starShips = await _starShip.GetStarships();
+                var starShips = await _starShip.GetStarships(page);
 
                 return starShips?.Results == null
                     ? throw new Exception("Starship integration error: No response from Star Wars API")
@@ -31,11 +32,11 @@ namespace StarWars.Infrastructure.HttpAdapters.Starships
             }
         }
 
-        public async Task<List<StarshipDataResult>> GetStarshipsByManufacturer(string manufacturer)
+        public async Task<List<StarshipDataResult>> GetStarshipsByManufacturer(int page, string manufacturer)
         {
             try
             {
-                var starShips = await GetStarships();
+                var starShips = await GetStarships(page);
                 return starShips.Where(
                     x => x.Manufacturer.Equals(manufacturer,StringComparison.InvariantCultureIgnoreCase)
                 ).ToList();
