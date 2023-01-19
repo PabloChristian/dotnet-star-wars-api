@@ -5,6 +5,8 @@ namespace StarWars.Application.Starships.Query
 {
     public class StarshipQuery<TResult> : GenericCommandResult<TResult>
     {
+        public int Page { get; set; }
+
         public override bool IsValid()
         {
             ValidationResult = new StarshipQueryValidator<StarshipQuery<TResult>>().Validate(this);
@@ -13,6 +15,12 @@ namespace StarWars.Application.Starships.Query
 
         internal class StarshipQueryValidator<T> : AbstractValidator<T> where T : StarshipQuery<TResult>
         {
+            public StarshipQueryValidator()
+            {
+                RuleFor(x => x.Page)
+                    .NotNull()
+                    .GreaterThan(0);
+            }
         }
     }
 }

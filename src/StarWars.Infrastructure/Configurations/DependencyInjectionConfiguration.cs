@@ -6,18 +6,33 @@ using Refit;
 using StarWars.Infrastructure.Configurations;
 using StarWars.Infrastructure.HttpAdapters.Starships.Interfaces;
 using StarWars.Infrastructure.ServiceBus;
+using StarWars.Infrastructure.Data.Context;
 using StarWars.Shared.Kernel.Handler;
 using StarWars.Shared.Kernel.Notifications;
 using System.Text.Json;
+using StarWars.Domain.Interfaces.Repositories;
+using StarWars.Infrastructure.Data;
+using StarWars.Infrastructure.Data.Repositories;
+using StarWars.Domain.Interfaces.Services;
+using StarWars.Domain.Services;
 
-namespace StarWars.Infrastructure.InversionOfControl
+namespace StarWars.Infrastructure.Configurations
 {
     public static class DependencyInjectionConfiguration
     {
         public static void RegisterServices(this IServiceCollection services)
         {
+            services.RegisterData();
             services.RegisterHandlers();
             services.RegisterHttpClients();
+            services.RegisterApplicationServices();
+        }
+
+        private static void RegisterData(this IServiceCollection services)
+        {
+            services.AddDbContext<StarWarsContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         private static void RegisterHandlers(this IServiceCollection services)
@@ -40,6 +55,11 @@ namespace StarWars.Infrastructure.InversionOfControl
             };
 
             services.AddRefitClient<IStarshipAdapter>(settings).ConfigureHttpClient(c => c.BaseAddress = new Uri("https://swapi.dev/"));
+        }
+
+        private static void RegisterApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<IIdentityService, IdentityService>();
         }
     }
 }

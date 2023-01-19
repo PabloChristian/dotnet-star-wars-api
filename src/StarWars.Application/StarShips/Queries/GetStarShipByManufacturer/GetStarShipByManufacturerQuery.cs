@@ -15,7 +15,7 @@ namespace StarWars.Application.Starships.Queries.GetStarshipByManufacture
             return ValidationResult.IsValid;
         }
 
-        internal class GetStarshipByManufacturerQueryValidator : AbstractValidator<GetStarshipByManufacturerQuery>
+        public class GetStarshipByManufacturerQueryValidator : AbstractValidator<GetStarshipByManufacturerQuery>
         {
             public GetStarshipByManufacturerQueryValidator()
             {

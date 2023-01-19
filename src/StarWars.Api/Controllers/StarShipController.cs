@@ -4,6 +4,7 @@ using StarWars.Shared.Kernel.Handler;
 using StarWars.Shared.Kernel.Notifications;
 using StarWars.Application.Starships.Queries.GetStarshipList;
 using StarWars.Application.Starships.Queries.GetStarshipByManufacture;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StarWars.Api.Controllers
 {
@@ -18,6 +19,7 @@ namespace StarWars.Api.Controllers
             : base(notifications, mediator) { }
 
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetStarships(
@@ -28,6 +30,7 @@ namespace StarWars.Api.Controllers
         }
 
         [HttpGet("manufacturer/{manufacturer}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetStarshipsByManufacturer(

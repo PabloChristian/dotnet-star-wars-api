@@ -1,10 +1,13 @@
 using StarWars.Api.Configurations;
 using StarWars.Application.AutoMapper;
-using StarWars.Infrastructure.InversionOfControl;
+using StarWars.Infrastructure.Configurations;
 using StarWars.Application.Common;
 using Newtonsoft.Json;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
+using StarWars.Infrastructure.Security;
+using Microsoft.EntityFrameworkCore;
+using StarWars.Infrastructure.Data.Context;
 
 namespace StarWars.Api
 {
@@ -30,7 +33,8 @@ namespace StarWars.Api
             });
 
             services.AddCors(options => options.AddPolicy("CorsPolicy", builder => builder.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build()));
-
+            services.AddDbContext<StarWarsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StarWarsConnection")));
+            services.AddIdentitySetup(Configuration);
             AutoMapperConfig.RegisterMappings();
 
             services.AddSwagger();
@@ -56,6 +60,8 @@ namespace StarWars.Api
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.AddMigration<StarWarsContext>();
 
             app.UseEndpoints(endpoints =>
             {

@@ -10,6 +10,7 @@ namespace StarWars.Application.Common
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
             services.AddMediatR(Assembly.GetExecutingAssembly())
