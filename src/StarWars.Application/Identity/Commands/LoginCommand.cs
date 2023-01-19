@@ -6,7 +6,7 @@ namespace StarWars.Application.Identity.Commands
 {
     public class LoginCommand<TResult> : GenericCommandResult<TResult>
     {
-        public string UserName { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
         public override bool IsValid() => throw new NotImplementedException();
@@ -17,7 +17,7 @@ namespace StarWars.Application.Identity.Commands
 
             protected virtual void StartRules()
             {
-                RuleFor(x => x.UserName)
+                RuleFor(x => x.Username)
                     .NotEmpty()
                     .WithMessage(Resources.User_UserName_Required);
 

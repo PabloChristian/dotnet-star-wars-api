@@ -27,7 +27,7 @@ namespace StarWars.Api
                 };
 
                 options.SerializerSettings.Converters.Add(dateConverter);
-                options.SerializerSettings.Culture = new CultureInfo("en-IE");
+                options.SerializerSettings.Culture = new CultureInfo("en-US");
                 options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver { NamingStrategy = new SnakeCaseNamingStrategy() };
             });

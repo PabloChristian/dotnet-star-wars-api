@@ -22,9 +22,9 @@ namespace StarWars.Infrastructure.Data.Context
             var config = new ConfigurationBuilder()
                  .SetBasePath(Directory.GetCurrentDirectory())
 #if DEBUG
-                 .AddJsonFile($"appsettings.Development.json")
+                 .AddJsonFile("appsettings.Development.json")
 #else
-                 .AddJsonFile($"appsettings.Production.json")
+                 .AddJsonFile("appsettings.Production.json")
 #endif
                  .Build();
 

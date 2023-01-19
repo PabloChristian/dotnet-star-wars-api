@@ -20,10 +20,9 @@
             {
                 Console.WriteLine(
                     $"Something went wrong with Response ID: {httpContext.Connection.Id}"
-                    + $" - StatusCode: {httpContext.Response.StatusCode} - Error: {e.Message}"
+                    + $" - StatusCode: {httpContext.Response.StatusCode} - Error: {e.Message} - StackTrace: {e.Message}"
                 );
             }
         }
-
     }
 }

@@ -14,7 +14,7 @@ namespace StarWars.Infrastructure.Data.Mapping
                 .HasMaxLength(150)
                 .IsRequired();
 
-            builder.Property(e => e.UserName)
+            builder.Property(e => e.Username)
                 .HasMaxLength(50)
                 .IsRequired();
 

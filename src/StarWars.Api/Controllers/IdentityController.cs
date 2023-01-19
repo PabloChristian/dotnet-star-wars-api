@@ -40,7 +40,7 @@ namespace StarWars.Api.Controllers
 
             if (token != null)
             {
-                _logger.LogInformation($"{command.UserName} registered and logged in");
+                _logger.LogInformation($"{command.Username} registered and logged in");
                 return Response(token);
             }
 
@@ -63,7 +63,7 @@ namespace StarWars.Api.Controllers
 
             if (token != null)
             {
-                _logger.LogInformation($"{command.UserName} logged in");
+                _logger.LogInformation($"{command.Username} logged in");
                 return Response(token);
             }
 

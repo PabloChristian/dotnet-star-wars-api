@@ -82,6 +82,8 @@ to stop the execution of the containers, type "docker-compose down"
 2. Open the command prompt (cmd), navigate inside the project "\src" folder, and type: "run.bat"
 3. This script will run the projects and open the browsers.
 
+Note: just in case for some reason the database doesn't create, in Visual Studio Navigate to Tools -> Nuget Package Manager -> Package Manage Console, and run the command "Add-Migration InitialCreate"
+
 ## 🤝 Critique
 This section is used to self-critique to reflect and write what would be good to improve over time:
 

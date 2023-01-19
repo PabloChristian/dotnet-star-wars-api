@@ -17,10 +17,9 @@
             {
                 Console.WriteLine(
                     $"Something went wrong with Request ID: {httpContext.Connection.Id}"
-                    + $" - StatusCode: {httpContext.Response.StatusCode} - Error: {e.Message}"
+                    + $" - StatusCode: {httpContext.Response.StatusCode} - Error: {e.Message} - StackTrace: {e.StackTrace}"
                 );
             }
         }
-
     }
 }

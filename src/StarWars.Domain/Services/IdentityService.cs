@@ -8,23 +8,26 @@ using StarWars.Domain.Interfaces.Repositories;
 using StarWars.Domain.Entity;
 using StarWars.Shared.Kernel.Identity;
 using StarWars.Shared.Kernel.Helper;
+using StarWars.Domain.Exceptions;
 
 namespace StarWars.Domain.Services
 {
     public class IdentityService : IIdentityService
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _config;
 
-        public IdentityService(IUserRepository userRepository, IConfiguration config)
+        public IdentityService(IUnitOfWork unitOfWork, IUserRepository userRepository, IConfiguration config)
         {
+            _unitOfWork = unitOfWork;
             _userRepository = userRepository;
             _config = config;
         }
 
         public User Authenticate(string username, string password) =>
-        _userRepository.GetByExpression(
-                x => x.UserName == username && x.Password == Cryptography.PasswordEncrypt(password)
+            _userRepository.GetByExpression(
+                x => x.Username == username && x.Password == Cryptography.PasswordEncrypt(password)
             )?.FirstOrDefault();
 
         public TokenJwt GetToken(Guid id, string username)
@@ -44,11 +47,23 @@ namespace StarWars.Domain.Services
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Issuer"],
             claims: claims,
-                expires: DateTime.Now.AddMinutes(20),
+                expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: credentials
             );
 
             return new TokenJwt(true, new JwtSecurityTokenHandler().WriteToken(token));
+        }
+
+        public async Task<User> Register(string username, string password, CancellationToken cancellationToken)
+        {
+            var userExists = _userRepository.GetByExpression(x => x.Username == username)?.FirstOrDefault();
+            if (userExists != null) throw new DomainException(Properties.Resources.User_AlreadyExists);
+
+            var user = new User(username, username, Cryptography.PasswordEncrypt(password));
+            await _userRepository.AddAsync(user, cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
+
+            return Authenticate(username, password);
         }
     }
 }

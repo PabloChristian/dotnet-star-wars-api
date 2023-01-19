@@ -16,7 +16,7 @@ namespace StarWars.Api.Middlewares
                 await _next(httpContext);
             }catch(Exception e)
             {
-                Console.WriteLine($"Error: Something went wrong: {e.Message}");
+                Console.WriteLine($"Error: Something went wrong: {e.Message} - StackTrace: {e.StackTrace}");
                 await HandleExceptionAsync(httpContext, e);
             }
         }
