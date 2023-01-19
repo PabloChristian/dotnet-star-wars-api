@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StarWars.Infrastructure.HttpAdapters.StarShips.Results
+namespace StarWars.Infrastructure.HttpAdapters.Starships.Results
 {
-    public class StarShipResult
+    public class StarshipResult
     {
         public int Count { get; set; }
         public string Next { get; set; }
         public string Previous { get; set; }
-        public List<StarShipDataResult> Results { get; set; }
+        public List<StarshipDataResult> Results { get; set; }
     }
 }

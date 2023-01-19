@@ -4,26 +4,26 @@ using StarWars.Domain.ViewModels.Starships;
 using StarWars.Infrastructure.HttpAdapters.Starships;
 using StarWars.Infrastructure.HttpAdapters.Starships.Interfaces;
 
-namespace StarWars.Application.Starships.Queries.GetStarshipByManufacture
+namespace StarWars.Application.Starships.Queries.GetStarshipList
 {
-    public class GetStarshipByManufacturerQueryHandler : IRequestHandler<GetStarshipByManufacturerQuery, List<StarshipViewModel>>
+    public class GetStarshipQueryHandler : IRequestHandler<GetStarshipQuery, List<StarshipViewModel>>
     {
         private readonly IMapper _mapper;
         private readonly IStarshipAdapter _starShipAdapter;
 
-        public GetStarshipByManufacturerQueryHandler(IStarshipAdapter starShipAdapter, IMapper mapper)
+        public GetStarshipQueryHandler(IStarshipAdapter starShipAdapter, IMapper mapper)
         {
             _mapper = mapper;
             _starShipAdapter = starShipAdapter;
         }
 
-        public async Task<List<StarshipViewModel>> Handle(GetStarshipByManufacturerQuery request, CancellationToken cancellationToken)
+        public async Task<List<StarshipViewModel>> Handle(GetStarshipQuery request, CancellationToken cancellationToken)
         {
             var starShipAdapter = new StarshipAdapter(_starShipAdapter);
 
             var starShipsData = await starShipAdapter.GetStarships();
 
-            var starshipsViewModel = new List<StarshipViewModel> { };
+            var starshipsViewModel = new List<StarshipViewModel>();
             return starshipsViewModel;
         }
     }

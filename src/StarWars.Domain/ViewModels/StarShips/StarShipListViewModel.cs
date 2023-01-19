@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StarWars.Domain.ViewModels.StarShips
+namespace StarWars.Domain.ViewModels.Starships
 {
-    public class StarShipListViewModel
+    public class StarshipListViewModel
     {
-        public IList<StarShipViewModel> StarShips { get; set; }
-        public int Count { get; set; }
+        public IList<StarshipViewModel> Starships { get; set; }
     }
 }

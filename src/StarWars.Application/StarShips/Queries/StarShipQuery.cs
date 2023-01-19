@@ -1,17 +1,17 @@
 ﻿using FluentValidation;
 using StarWars.Application.Common;
 
-namespace StarWars.Application.StarShips.Query
+namespace StarWars.Application.Starships.Query
 {
-    public class StarShipQuery<TResult> : GenericCommandResult<TResult>
+    public class StarshipQuery<TResult> : GenericCommandResult<TResult>
     {
         public override bool IsValid()
         {
-            ValidationResult = new StarShipQueryValidator<StarShipQuery<TResult>>().Validate(this);
+            ValidationResult = new StarshipQueryValidator<StarshipQuery<TResult>>().Validate(this);
             return ValidationResult.IsValid;
         }
 
-        internal class StarShipQueryValidator<T> : AbstractValidator<T> where T : StarShipQuery<TResult>
+        internal class StarshipQueryValidator<T> : AbstractValidator<T> where T : StarshipQuery<TResult>
         {
         }
     }
