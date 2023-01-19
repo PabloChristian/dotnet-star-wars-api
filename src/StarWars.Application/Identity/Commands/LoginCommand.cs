@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using StarWars.Application.Common;
+using StarWars.Application.Properties;
 
 namespace StarWars.Application.Identity.Commands
 {
@@ -16,8 +17,13 @@ namespace StarWars.Application.Identity.Commands
 
             protected virtual void StartRules()
             {
-                RuleFor(x => x.UserName).NotEmpty();
-                RuleFor(x => x.Password).NotEmpty();
+                RuleFor(x => x.UserName)
+                    .NotEmpty()
+                    .WithMessage(Resources.User_UserName_Required);
+
+                RuleFor(x => x.Password)
+                    .NotEmpty()
+                    .WithMessage(Resources.User_Password_Required);
             }
         }
     }

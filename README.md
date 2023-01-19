@@ -24,13 +24,13 @@ These are all the technologies and patterns used to develop this application
 ##### BackEnd
 - [C# .NET 6.0 Web API](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 - [MediatR](https://www.nuget.org/packages/MediatR)
-- [Refit](https://github.com/reactiveui/refit)
 - [FluentValidation](https://www.nuget.org/packages/FluentValidation)
 - [AutoMapper](https://www.nuget.org/packages/AutoMapper)
 - [Xunit](https://www.nuget.org/packages/xunit)
 - [FluentAssertions](https://www.nuget.org/packages/FluentAssertions)
 - [Moq](https://www.nuget.org/packages/Moq)
 - [ASP.NET Core Authentication JwtBearer] (https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer)
+- [Refit](https://github.com/reactiveui/refit)
 
 Patterns and Techniques:
 - TDD (Test Driven Development)
@@ -49,19 +49,38 @@ The project solution was based on DDD (Domain Driven Design) concept.
 ![DDD](./images/architecture.png)
 
 ## Requirements
+I recommend following the option 01, so you wont need to install and run all the other tools needed for the project to work.
 
-**Option 01: Outside Containers** 
+**Option 01: Run in Containers** 
+To run the local application in containers, you will need to download and install the following:
+- [Docker Desktop](https://docs.docker.com/desktop/#download-and-install)
+- [Docker Compose](https://docs.docker.com/compose/install/compose-desktop/)
+
+**Option 02: Outside Containers** 
 If you want to run the project outside containers, you must also have the following:
 - [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [SQLServer](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 
-## ⚙️ Executing the Project
+## Executing the Project
 To execute the project, follow the steps below:
 
-#### Execution
+#### Important Notes
+1. When executing the page for two or more users, you need to open the browser as incognito mode, because the token session is stored on local storage of your browser.
+2. If for any reason you receive error sending message to RabbitMQ, it is because the port couldnt be opened or is in use. To solve the problem go on docker-compose on 'rabbitmq-service', change port number and run the commands again.
 
-**Option 01: Outside Containers**
-1. Open the command prompt (cmd), navigate inside the project "\src" folder, and type: "run.bat"
-2. This script will run the projects and open the browsers.
+**Option 01: Run in Containers**
+1. Run Docker Desktop.
+2. Open the command prompt (cmd), navigate inside the project "\src" folder, and type: "docker-compose build" to build the containers (this is only necessary the first time).
+3. Type "docker-compose up -d" to start the application containers.
+4. Now you can view the application:
+	1. To view the Web Api Swagger documentation, navigate to http://localhost:8082/swagger
+
+to stop the execution of the containers, type "docker-compose down"
+
+**Option 02: Outside Containers**
+1. Run SQLServer(port 1435).
+2. Open the command prompt (cmd), navigate inside the project "\src" folder, and type: "run.bat"
+3. This script will run the projects and open the browsers.
 
 ## 🤝 Critique
 This section is used to self-critique to reflect and write what would be good to improve over time:

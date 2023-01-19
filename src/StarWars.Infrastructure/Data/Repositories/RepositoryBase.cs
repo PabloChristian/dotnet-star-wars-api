@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StarWars.Domain.Interfaces.Repositories;
 using StarWars.Infrastructure.Data.Context;
-using StarWars.Infrastructure.Data.Interfaces;
 using StarWars.Shared.Kernel.Entity;
 using System.Linq.Expressions;
 

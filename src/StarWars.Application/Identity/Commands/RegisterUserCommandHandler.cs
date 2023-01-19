@@ -7,20 +7,20 @@ using StarWars.Shared.Kernel.Notifications;
 
 namespace StarWars.Application.Identity.Commands
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, TokenJwt>
+    public class AuthenticateUserCommandHandler : IRequestHandler<AuthenticateUserCommand, TokenJwt>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IIdentityService _identityService;
         private readonly IMediatorHandler _mediatorHandler;
 
-        public RegisterUserCommandHandler(IUnitOfWork unitOfWork, IMediatorHandler mediatorHandler, IIdentityService loginService)
+        public AuthenticateUserCommandHandler(IUnitOfWork unitOfWork, IMediatorHandler mediatorHandler, IIdentityService loginService)
         {
             _unitOfWork = unitOfWork;
             _mediatorHandler = mediatorHandler;
             _identityService = loginService;
         }
 
-        public async Task<TokenJwt> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<TokenJwt> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
             TokenJwt token = new(true, string.Empty);
 

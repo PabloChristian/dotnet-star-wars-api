@@ -25,6 +25,29 @@ namespace StarWars.Api.Controllers
         }
 
         /// <summary>
+        /// Identity control for register
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiOkReturn))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [HttpPost("register")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RegisterAsync(RegisterUserCommand command)
+        {
+            var token = await _mediator.SendCommandResult(command);
+
+            if (token != null)
+            {
+                _logger.LogInformation($"{command.UserName} registered and logged in");
+                return Response(token);
+            }
+
+            return Unauthorized();
+        }
+
+        /// <summary>
         /// Identity control for login
         /// </summary>
         /// <param name="command"></param>
