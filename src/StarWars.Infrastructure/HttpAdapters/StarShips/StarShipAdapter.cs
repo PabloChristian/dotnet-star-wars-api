@@ -3,7 +3,6 @@ using Refit;
 using StarWars.Domain.Exceptions;
 using StarWars.Infrastructure.HttpAdapters.Starships.Interfaces;
 using StarWars.Infrastructure.HttpAdapters.Starships.Results;
-using System.Linq;
 
 namespace StarWars.Infrastructure.HttpAdapters.Starships
 {

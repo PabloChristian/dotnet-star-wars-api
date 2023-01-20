@@ -6,7 +6,7 @@ namespace StarWars.Application.Starships.Query
     public class StarshipQuery<TResult> : GenericCommandResult<TResult>
     {
         public int Page { get; set; } = 1;
-        public string Manufacturer { get; set; } = "";
+        public string? Manufacturer { get; set; } = "";
 
         public override bool IsValid()
         {

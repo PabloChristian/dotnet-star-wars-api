@@ -31,7 +31,7 @@ namespace StarWars.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetStarships(
             [FromQuery] int page = 1,
-            [FromQuery] string manufacturer = "")
+            [FromQuery] string? manufacturer = null)
         {
             var query = new GetStarshipQuery(page, manufacturer);
             return Response(await _mediator.SendCommandResult(query, new CancellationToken()));

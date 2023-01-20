@@ -7,7 +7,7 @@ namespace StarWars.Application.Starships.Queries.GetStarshipList
 {
     public class GetStarshipQuery : StarshipQuery<List<StarshipViewModel>>
     {
-        public GetStarshipQuery(int page = 1, string manufacturer = "")
+        public GetStarshipQuery(int page = 1, string? manufacturer = "")
         {
             Page = page;
             Manufacturer = manufacturer;
