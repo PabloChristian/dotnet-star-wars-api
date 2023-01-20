@@ -44,7 +44,7 @@ Patterns and Techniques:
 - Domain Helper
 
 ## 🛠 Architecture
-The project solution was based on DDD (Domain Driven Design) concept.
+The project solution was based on [DDD (Domain Driven Design)](https://en.wikipedia.org/wiki/Domain-driven_design) concept.
 
 ![DDD](./images/architecture.png)
 
