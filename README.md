@@ -49,7 +49,7 @@ The project solution was based on DDD (Domain Driven Design) concept.
 ![DDD](./images/architecture.png)
 
 ## Requirements
-I recommend following the option 01, so you wont need to install and run all the other tools needed for the project to work.
+I recommend following the option 01, so you won't need to install and run all the other tools needed for the project to work.
 
 **Option 01: Run in Containers** 
 To run the local application in containers, you will need to download and install the following:
@@ -63,10 +63,6 @@ If you want to run the project outside containers, you must also have the follow
 
 ## Executing the Project
 To execute the project, follow the steps below:
-
-#### Important Notes
-1. When executing the page for two or more users, you need to open the browser as incognito mode, because the token session is stored on local storage of your browser.
-2. If for any reason you receive error sending message to RabbitMQ, it is because the port couldnt be opened or is in use. To solve the problem go on docker-compose on 'rabbitmq-service', change port number and run the commands again.
 
 **Option 01: Run in Containers**
 1. Run Docker Desktop.
@@ -88,16 +84,13 @@ Note: just in case for some reason the database doesn't create, in Visual Studio
 This section is used to self-critique to reflect and write what would be good to improve over time:
 
 1. Performance:
-	1. Cache service to store the lattest requests and posts for better performance.
+	1. Cache service to store the lattest and common requests for better performance.
 2. Scalability:
 	1. Use of AWS ECS (Elastic Container Service) or EKS (Elastic Kubernetes Service) to manage the Docker Containers.
 	2. Use of AWS Auto Scaling to manage scalability of instances by CPU usage. (Above 70% CPU usage would create new instance).
 3. Load Balancing:
     1. Use of AWS Load Balancer to balance the requests between the containers (active instances).
-4. Security:
-	1. Use of .NET Identity to manage user authentication for security.
-	2. Implement token JWT and use of claims to manager user permissions.
-5. Tests
+4. Tests
 	1. Implement remaining tests left for the other classes.
 	2. Implement integration tests to test end-to-end requests.
 	3. Implement K6 to execute load tests so we can monitor our application to see if its going to be able to handle the expected number of users and requests per second.
