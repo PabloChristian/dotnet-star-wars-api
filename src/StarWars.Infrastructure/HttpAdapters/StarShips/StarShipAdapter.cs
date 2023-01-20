@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Refit;
+using StarWars.Domain.Exceptions;
 using StarWars.Infrastructure.HttpAdapters.Starships.Interfaces;
 using StarWars.Infrastructure.HttpAdapters.Starships.Results;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace StarWars.Infrastructure.HttpAdapters.Starships
                 var starShips = await _starShip.GetStarships(page);
 
                 return starShips?.Results == null
-                    ? throw new Exception("Starship integration error: No response from Star Wars API")
+                    ? throw new IntegrationException("Starship integration error: No response from Star Wars API")
                     : starShips.Results;
             }
             catch (ApiException ex)

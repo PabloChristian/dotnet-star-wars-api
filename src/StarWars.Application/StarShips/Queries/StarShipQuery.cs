@@ -8,7 +8,7 @@ namespace StarWars.Application.Starships.Query
 {
     public class StarshipQuery<TResult> : GenericCommandResult<TResult>
     {
-        public int Page { get; set; }
+        public int Page { get; set; } = 1;
 
         public override bool IsValid()
         {
