@@ -1,14 +1,12 @@
 ﻿using FluentValidation;
-using MediatR;
 using StarWars.Application.Common;
-using StarWars.Shared.Kernel.Handler;
-using System.Threading;
 
 namespace StarWars.Application.Starships.Query
 {
     public class StarshipQuery<TResult> : GenericCommandResult<TResult>
     {
         public int Page { get; set; } = 1;
+        public string Manufacturer { get; set; } = "";
 
         public override bool IsValid()
         {

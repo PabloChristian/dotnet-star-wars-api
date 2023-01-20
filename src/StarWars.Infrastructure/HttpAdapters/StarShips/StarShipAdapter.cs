@@ -32,21 +32,5 @@ namespace StarWars.Infrastructure.HttpAdapters.Starships
                 throw;
             }
         }
-
-        public async Task<List<StarshipDataResult>> GetStarshipsByManufacturer(int page, string manufacturer)
-        {
-            try
-            {
-                var starShips = await GetStarships(page);
-                return starShips.Where(
-                    x => x.Manufacturer.Equals(manufacturer,StringComparison.InvariantCultureIgnoreCase)
-                ).ToList();
-            }
-            catch (ApiException ex)
-            {
-                Console.WriteLine($"Starship integration error: {ex.Message}");
-                throw;
-            }
-        }
     }
 }

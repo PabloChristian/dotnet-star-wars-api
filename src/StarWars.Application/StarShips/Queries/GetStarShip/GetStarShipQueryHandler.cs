@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
+using Refit;
 using StarWars.Domain.ViewModels.Starships;
 using StarWars.Infrastructure.HttpAdapters.Starships;
 using StarWars.Infrastructure.HttpAdapters.Starships.Interfaces;
+using StarWars.Infrastructure.HttpAdapters.Starships.Results;
 using StarWars.Infrastructure.ServiceBus;
 using StarWars.Shared.Kernel.Handler;
 using StarWars.Shared.Kernel.Notifications;
@@ -34,7 +36,20 @@ namespace StarWars.Application.Starships.Queries.GetStarshipList
 
             var starShipAdapter = new StarshipAdapter(_starShipAdapter);
             var starShipsData = await starShipAdapter.GetStarships(request.Page);
+
+            if(!string.IsNullOrEmpty(request.Manufacturer))
+            {
+                FilterStarshipsByManufacturer(ref starShipsData, request.Manufacturer);
+            }
+
             return _mapper.Map<List<StarshipViewModel>>(starShipsData);
+        }
+
+        private static void FilterStarshipsByManufacturer(ref List<StarshipDataResult> starShips, string manufacturer)
+        {
+            starShips = starShips.Where(
+                x => x.Manufacturer.Equals(manufacturer, StringComparison.InvariantCultureIgnoreCase)
+            ).ToList();
         }
     }
 }
