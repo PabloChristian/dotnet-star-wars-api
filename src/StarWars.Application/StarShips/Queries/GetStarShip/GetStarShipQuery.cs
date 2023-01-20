@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using StarWars.Application.Starships.Query;
 using StarWars.Domain.ViewModels.Starships;
+using StarWars.Shared.Kernel.Handler;
 
 namespace StarWars.Application.Starships.Queries.GetStarshipList
 {

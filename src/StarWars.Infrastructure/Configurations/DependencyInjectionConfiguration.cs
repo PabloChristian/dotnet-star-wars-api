@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json.Serialization;
 using Refit;
-using StarWars.Infrastructure.Configurations;
 using StarWars.Infrastructure.HttpAdapters.Starships.Interfaces;
 using StarWars.Infrastructure.ServiceBus;
 using StarWars.Infrastructure.Data.Context;
@@ -15,6 +12,7 @@ using StarWars.Infrastructure.Data;
 using StarWars.Infrastructure.Data.Repositories;
 using StarWars.Domain.Interfaces.Services;
 using StarWars.Domain.Services;
+using StarWars.Infrastructure.HttpAdapters;
 
 namespace StarWars.Infrastructure.Configurations
 {
@@ -49,12 +47,9 @@ namespace StarWars.Infrastructure.Configurations
                 WriteIndented = true,
             };
 
-            var settings = new RefitSettings()
-            {
-                ContentSerializer = new SystemTextJsonContentSerializer(options)
-            };
+            var settings = new RefitSettings(){ ContentSerializer = new SystemTextJsonContentSerializer(options)};
 
-            services.AddRefitClient<IStarshipAdapter>(settings).ConfigureHttpClient(c => c.BaseAddress = new Uri("https://swapi.dev/"));
+            services.AddRefitClient<IStarshipAdapter>(settings).ConfigureHttpClient(c => c.BaseAddress = new Uri(HttpHelper.StarWarsApiUrl));
         }
 
         private static void RegisterApplicationServices(this IServiceCollection services)

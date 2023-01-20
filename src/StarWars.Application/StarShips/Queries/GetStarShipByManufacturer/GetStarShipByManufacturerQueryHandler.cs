@@ -27,7 +27,9 @@ namespace StarWars.Application.Starships.Queries.GetStarshipByManufacture
             if (!request.IsValid())
             {
                 foreach (var error in request.GetErrors())
-                    await _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage));
+                    await _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage), cancellationToken);
+
+                return null;
             }
 
             var starShipAdapter = new StarshipAdapter(_starShipAdapter);

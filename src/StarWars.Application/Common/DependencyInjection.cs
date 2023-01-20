@@ -2,6 +2,7 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
+using System.Globalization;
 
 namespace StarWars.Application.Common
 {
@@ -10,13 +11,11 @@ namespace StarWars.Application.Common
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-
-            services.AddMediatR(Assembly.GetExecutingAssembly())
-                .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en");
+
             return services;
         }
     }

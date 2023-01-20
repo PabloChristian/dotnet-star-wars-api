@@ -3,6 +3,7 @@ using MediatR;
 using StarWars.Domain.ViewModels.Starships;
 using StarWars.Infrastructure.HttpAdapters.Starships;
 using StarWars.Infrastructure.HttpAdapters.Starships.Interfaces;
+using StarWars.Infrastructure.ServiceBus;
 using StarWars.Shared.Kernel.Handler;
 using StarWars.Shared.Kernel.Notifications;
 
@@ -26,7 +27,9 @@ namespace StarWars.Application.Starships.Queries.GetStarshipList
             if (!request.IsValid())
             {
                 foreach (var error in request.GetErrors())
-                    await _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage));
+                    await _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage), cancellationToken);
+
+                return null;
             }
 
             var starShipAdapter = new StarshipAdapter(_starShipAdapter);

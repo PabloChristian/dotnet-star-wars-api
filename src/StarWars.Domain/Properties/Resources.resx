@@ -117,15 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Message_NotDelivered_SelectUser" xml:space="preserve">
-    <value>Message was not delivered. please, select an user</value>
-  </data>
-  <data name="Message_Required" xml:space="preserve">
-    <value>The message is required.</value>
-  </data>
-  <data name="Message_Sender_Required" xml:space="preserve">
-    <value>The sender is required.</value>
-  </data>
   <data name="User_AlreadyExists" xml:space="preserve">
     <value>User already exists</value>
   </data>
@@ -133,10 +124,10 @@
     <value>The name must have maximum of 150 characters</value>
   </data>
   <data name="User_Name_Required" xml:space="preserve">
-    <value>The name is required.</value>
+    <value>The name is required</value>
   </data>
   <data name="User_NotFound" xml:space="preserve">
-    <value>User not found</value>
+    <value>User not found or invalid password</value>
   </data>
   <data name="User_Password_MaximumLength" xml:space="preserve">
     <value>The password must have maximum of 15 characters</value>
@@ -157,6 +148,6 @@
     <value>The username must have maximum of 50 characters</value>
   </data>
   <data name="User_UserName_Required" xml:space="preserve">
-    <value>The username is required.</value>
+    <value>The username is required</value>
   </data>
 </root>

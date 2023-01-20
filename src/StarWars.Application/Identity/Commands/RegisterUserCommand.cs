@@ -1,4 +1,7 @@
-﻿using StarWars.Shared.Kernel.Identity;
+﻿using FluentValidation;
+using StarWars.Domain.Properties;
+using StarWars.Shared.Kernel.Handler;
+using StarWars.Shared.Kernel.Identity;
 
 namespace StarWars.Application.Identity.Commands
 {
@@ -10,9 +13,6 @@ namespace StarWars.Application.Identity.Commands
             return ValidationResult.IsValid;
         }
 
-        internal class RegisterUserCommandValidator : LoginValidator<RegisterUserCommand>
-        {
-            protected override void StartRules() => base.StartRules();
-        }
+        public class RegisterUserCommandValidator : LoginValidator<RegisterUserCommand>{}
     }
 }

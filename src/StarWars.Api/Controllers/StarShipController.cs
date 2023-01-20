@@ -25,8 +25,8 @@ namespace StarWars.Api.Controllers
         public async Task<IActionResult> GetStarships(
             [FromQuery] int page = 1)
         {
-            var query = new GetStarshipQuery { Page = page };
-            return Ok(await _mediator.SendCommandResult(query, new CancellationToken()));
+            var query = new GetStarshipQuery() { Page = page };
+            return Response(await _mediator.SendCommandResult(query, new CancellationToken()));
         }
 
         [HttpGet("manufacturer/{manufacturer}")]
@@ -37,8 +37,8 @@ namespace StarWars.Api.Controllers
             [FromRoute] string manufacturer,
             [FromQuery] int page = 1)
         {
-            var command = new GetStarshipByManufacturerQuery { Page = page, Manufacturer = manufacturer };
-            return Ok(await _mediator.SendCommandResult(command, new CancellationToken()));
+            var command = new GetStarshipByManufacturerQuery() { Page = page, Manufacturer = manufacturer };
+            return Response(await _mediator.SendCommandResult(command, new CancellationToken()));
         }
     }
 }

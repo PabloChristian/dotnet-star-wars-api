@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using StarWars.Domain.Entity;
 using StarWars.Domain.Interfaces.Repositories;
 using StarWars.Domain.Interfaces.Services;
 using StarWars.Shared.Kernel.Handler;
@@ -22,9 +23,23 @@ namespace StarWars.Application.Identity.Commands
 
         public async Task<TokenJwt> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
+            if (!request.IsValid())
+            {
+                foreach (var error in request.GetErrors())
+                    await _mediatorHandler.RaiseEvent(new DomainNotification(error.ErrorCode, error.ErrorMessage), cancellationToken);
+
+                return new TokenJwt(false, string.Empty);
+            }
+
             TokenJwt token = new(true, string.Empty);
             var user = _identityService.Authenticate(request.Username, request.Password);
+            token = await ValidateUser(token, user, cancellationToken);
 
+            return await Task.FromResult(token);
+        }
+
+        private async Task<TokenJwt> ValidateUser(TokenJwt token, User user, CancellationToken cancellationToken)
+        {
             if (user != null)
             {
                 token = _identityService.GetToken(user.Id, user.Username);
@@ -35,7 +50,7 @@ namespace StarWars.Application.Identity.Commands
                 await _mediatorHandler.RaiseEvent(new DomainNotification("Error", "User not found"));
             }
 
-            return await Task.FromResult(token);
+            return token;
         }
     }
 }
